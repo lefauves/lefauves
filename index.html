@@ -202,26 +202,43 @@
       to   { transform: scaleX(1); opacity: 1; }
     }
 
-    /* Under Construction */
+    /* Under Construction — split animation */
     .under {
+      display: flex;
+      gap: 0.3em;
+      justify-content: center;
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(1rem, 3.5vw, 2.6rem);
-      letter-spacing: 0.22em;
-      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.8);
       text-shadow: 0 2px 8px rgba(0,0,0,0.9);
-      animation: fadeUp 0.9s ease both;
-      animation-delay: 0.4s;
       margin-bottom: 0.6rem;
+      overflow: visible;
+    }
+    .under-left  { display: inline-block; animation: fromLeft  6s cubic-bezier(0.4,0,0.2,1) infinite; }
+    .under-right { display: inline-block; animation: fromRight 6s cubic-bezier(0.4,0,0.2,1) infinite; }
+
+    @keyframes fromLeft {
+      0%   { transform: translateX(-110vw); opacity: 0; }
+      18%  { transform: translateX(0);      opacity: 1; }
+      62%  { transform: translateX(0);      opacity: 1; }
+      80%  { transform: translateX(0);      opacity: 0; }
+      100% { transform: translateX(-110vw); opacity: 0; }
+    }
+    @keyframes fromRight {
+      0%   { transform: translateX(110vw);  opacity: 0; }
+      18%  { transform: translateX(0);      opacity: 1; }
+      62%  { transform: translateX(0);      opacity: 1; }
+      80%  { transform: translateX(0);      opacity: 0; }
+      100% { transform: translateX(110vw);  opacity: 0; }
     }
 
     /* Tagline */
     .tagline {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-weight: 300;
-      font-size: clamp(0.95rem, 2.5vw, 1.55rem);
+      font-family: 'Finger Paint', cursive;
+      font-size: clamp(0.8rem, 2vw, 1.2rem);
       color: rgba(255,255,255,0.5);
-      letter-spacing: 0.03em;
+      letter-spacing: 0.02em;
       text-shadow: 0 1px 6px rgba(0,0,0,0.9);
       animation: fadeUp 0.9s ease both;
       animation-delay: 0.6s;
@@ -293,7 +310,10 @@
   <main class="stage">
     <h1 class="logo">le fauves</h1>
     <div class="sig-line"></div>
-    <p class="under">Under Construction</p>
+    <p class="under">
+      <span class="under-left">Under</span>
+      <span class="under-right">Construction</span>
+    </p>
     <p class="tagline">brilliant art bends time.</p>
     <a class="ig-link" href="https://www.instagram.com/lefauves/" target="_blank" rel="noopener">
       <!-- Instagram icon -->
