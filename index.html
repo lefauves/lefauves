@@ -3,285 +3,224 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fauves — Soul Diver</title>
-  <meta name="description" content="John Paul Fauves — Contemporary Costa Rican artist. Bold, vivid, distorted. Soul diver." />
+  <title>Fauves</title>
+  <meta name="description" content="Brilliant art bends time." />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Space+Grotesk:wght@300;400;500;700&family=Pinyon+Script&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Pinyon+Script&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  <link rel="stylesheet" href="style.css" />
+    :root {
+      --pink:   #F0629C;
+      --black:  #0A0A0A;
+      --green:  #52C41A;
+      --yellow: #FFD600;
+      --red:    #FF1F00;
+      --blue:   #1E6FFF;
+      --white:  #FFFFFF;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--pink);
+      color: var(--black);
+      font-family: 'Bebas Neue', sans-serif;
+      overflow: hidden;
+    }
+
+    /* ── Blobs (painting-inspired background shapes) ── */
+    .blobs {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      mix-blend-mode: multiply;
+      opacity: 0.18;
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+    .blob-1 {
+      width: 380px; height: 380px;
+      background: var(--black);
+      top: -80px; left: -100px;
+      animation-duration: 14s;
+    }
+    .blob-2 {
+      width: 260px; height: 300px;
+      background: var(--green);
+      bottom: -60px; right: -40px;
+      animation-duration: 10s;
+      animation-delay: -4s;
+      opacity: 0.35;
+    }
+    .blob-3 {
+      width: 180px; height: 180px;
+      background: var(--yellow);
+      top: 30%; right: 8%;
+      animation-duration: 16s;
+      animation-delay: -8s;
+      opacity: 0.4;
+    }
+    .blob-4 {
+      width: 120px; height: 120px;
+      background: var(--red);
+      bottom: 25%; left: 6%;
+      animation-duration: 9s;
+      animation-delay: -2s;
+      opacity: 0.25;
+    }
+    .blob-5 {
+      width: 90px; height: 90px;
+      background: var(--blue);
+      top: 15%; left: 30%;
+      animation-duration: 18s;
+      animation-delay: -6s;
+      opacity: 0.3;
+    }
+    @keyframes drift {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(30px, 20px) scale(1.06); }
+    }
+
+    /* ── Main layout ── */
+    .stage {
+      position: relative;
+      z-index: 1;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      gap: 0;
+    }
+
+    /* ── Signature ── */
+    .signature-wrap {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) both;
+      animation-delay: 0.1s;
+    }
+    .signature {
+      font-family: 'Pinyon Script', cursive;
+      font-size: clamp(5rem, 18vw, 13rem);
+      line-height: 1;
+      color: var(--black);
+      letter-spacing: -0.01em;
+    }
+    .signature-line {
+      display: block;
+      width: 110%;
+      height: 3px;
+      background: var(--black);
+      margin-top: 0.2em;
+      transform-origin: left;
+      animation: lineGrow 0.8s cubic-bezier(0.16,1,0.3,1) both;
+      animation-delay: 0.6s;
+    }
+    @keyframes lineGrow {
+      from { transform: scaleX(0); opacity: 0; }
+      to   { transform: scaleX(1); opacity: 1; }
+    }
+
+    /* ── Under construction ── */
+    .label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(0.65rem, 1.8vw, 0.9rem);
+      letter-spacing: 0.4em;
+      color: var(--black);
+      opacity: 0.5;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+      animation: fadeUp 0.8s ease both;
+      animation-delay: 0.4s;
+    }
+    .under-construction {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 10vw, 8rem);
+      letter-spacing: 0.04em;
+      line-height: 1;
+      color: var(--black);
+      animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) both;
+      animation-delay: 0.7s;
+    }
+
+    /* ── Tagline ── */
+    .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.1rem, 3vw, 1.9rem);
+      color: var(--black);
+      opacity: 0.75;
+      margin-top: 1.2rem;
+      letter-spacing: 0.01em;
+      animation: fadeUp 0.8s ease both;
+      animation-delay: 0.95s;
+    }
+
+    /* ── Instagram link ── */
+    .ig-link {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--black);
+      opacity: 0.45;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: opacity 0.3s;
+      animation: fadeUp 0.8s ease both;
+      animation-delay: 1.2s;
+    }
+    .ig-link:hover { opacity: 1; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      .blobs { display: none; }
+      .blob-2, .blob-3 { display: block; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ============================================================
-       NAV
-  ============================================================ -->
-  <nav id="nav">
-    <a href="#hero" class="nav-logo">
-      <span class="logo-script">Fauves</span>
-    </a>
-    <button class="nav-toggle" id="navToggle" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#feed">Feed</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#gallery">Works</a></li>
-      <li><a href="#own">Own a Fauves</a></li>
-      <li><a href="https://www.instagram.com/lefauves/" target="_blank" rel="noopener" class="nav-ig">@lefauves</a></li>
-    </ul>
-  </nav>
-
-  <!-- ============================================================
-       HERO
-  ============================================================ -->
-  <section id="hero">
-    <div class="hero-grain"></div>
-    <div class="hero-bg-text" aria-hidden="true">FAUVES</div>
-
-    <div class="hero-content">
-      <p class="hero-label reveal">San José · Costa Rica · b.1980</p>
-      <h1 class="hero-title reveal">
-        <span class="line">JOHN</span>
-        <span class="line accent-red">PAUL</span>
-        <span class="line">FAUVES</span>
-      </h1>
-      <p class="hero-sub reveal">"Art is an expression of the soul,<br>and the soul is something unlimited."</p>
-      <div class="hero-cta reveal">
-        <a href="#gallery" class="btn btn-ghost">See the Work</a>
-        <a href="#own" class="btn btn-red">Own a Fauves</a>
-      </div>
-    </div>
-
-    <div class="hero-stats">
-      <div class="stat"><span class="stat-num">73K</span><span class="stat-label">Followers</span></div>
-      <div class="stat"><span class="stat-num">608</span><span class="stat-label">Works</span></div>
-      <div class="stat"><span class="stat-num">4</span><span class="stat-label">Continents</span></div>
-    </div>
-
-    <div class="hero-scroll-hint">
-      <span>scroll</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       MARQUEE
-  ============================================================ -->
-  <div class="marquee-wrap" aria-hidden="true">
-    <div class="marquee-track">
-      <span>IDENTITY</span><span class="dot">·</span>
-      <span>SOUL DIVER</span><span class="dot">·</span>
-      <span>DUALITY</span><span class="dot">·</span>
-      <span>A LOSS OF INNOCENCE</span><span class="dot">·</span>
-      <span>VIVID</span><span class="dot">·</span>
-      <span>DISTORTED</span><span class="dot">·</span>
-      <span>THE MICKEY ME COLLECTION</span><span class="dot">·</span>
-      <span>MASKS</span><span class="dot">·</span>
-      <span>POP SOUL</span><span class="dot">·</span>
-      <span>IDENTITY</span><span class="dot">·</span>
-      <span>SOUL DIVER</span><span class="dot">·</span>
-      <span>DUALITY</span><span class="dot">·</span>
-      <span>A LOSS OF INNOCENCE</span><span class="dot">·</span>
-      <span>VIVID</span><span class="dot">·</span>
-      <span>DISTORTED</span><span class="dot">·</span>
-      <span>THE MICKEY ME COLLECTION</span><span class="dot">·</span>
-      <span>MASKS</span><span class="dot">·</span>
-      <span>POP SOUL</span><span class="dot">·</span>
-    </div>
+  <div class="blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+    <div class="blob blob-5"></div>
   </div>
 
-  <!-- ============================================================
-       IG FEED CAROUSEL
-  ============================================================ -->
-  <section id="feed">
-    <div class="section-header reveal">
-      <span class="section-tag">Latest</span>
-      <h2>Feed</h2>
-      <a href="https://www.instagram.com/lefauves/" target="_blank" rel="noopener" class="section-link">@lefauves ↗</a>
+  <main class="stage">
+    <p class="label">↓</p>
+    <div class="signature-wrap">
+      <span class="signature">Fauves</span>
+      <span class="signature-line"></span>
     </div>
+    <p class="label">Under Construction</p>
+    <h1 class="under-construction">Under Construction</h1>
+    <p class="tagline">Brilliant art bends time.</p>
+  </main>
 
-    <!-- SnapWidget / IG Feed Embed
-         ──────────────────────────────────────────────────────────
-         TO CONNECT YOUR LIVE INSTAGRAM FEED:
-         1. Go to https://snapwidget.com (free account)
-         2. Connect @lefauves
-         3. Create a widget → copy the widget ID
-         4. Replace WIDGET_ID below with your actual ID
-         5. Uncomment the iframe and remove the placeholder grid
-         ──────────────────────────────────────────────────────────
+  <a class="ig-link" href="https://www.instagram.com/lefauves/" target="_blank" rel="noopener">
+    @lefauves ↗
+  </a>
 
-    <iframe src="https://snapwidget.com/embed/WIDGET_ID"
-            class="snapwidget-widget"
-            allowtransparency="true"
-            frameborder="0"
-            scrolling="no"
-            style="border:none; overflow:hidden; width:100%; height:500px;">
-    </iframe>
-    -->
-
-    <div class="feed-carousel" id="feedCarousel">
-      <div class="feed-track" id="feedTrack">
-        <!-- Feed items rendered by JS -->
-      </div>
-    </div>
-
-    <div class="feed-controls">
-      <button class="feed-btn" id="feedPrev" aria-label="Previous">←</button>
-      <button class="feed-btn" id="feedNext" aria-label="Next">→</button>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       ABOUT / MANIFESTO
-  ============================================================ -->
-  <section id="about">
-    <div class="about-grid">
-      <div class="about-quote reveal">
-        <blockquote>
-          <p>"Art is an expression<br>of the soul, and the soul<br>is something unlimited."</p>
-          <cite>— John Paul Fauves</cite>
-        </blockquote>
-      </div>
-
-      <div class="about-text reveal">
-        <span class="section-tag">Soul Diver</span>
-        <h2>The Artist</h2>
-        <p>
-          John Paul Fauves is a contemporary Costa Rican painter born in 1980, based in San José.
-          His journey began under the mentorship of Joaquín Rodríguez del Paso — one of Central America's
-          most important modernist tutors — where he spent 15 years mastering technique before stepping
-          into the international stage.
-        </p>
-        <p>
-          Fauves works in the space between Modernism and Pop Art — mixing fragments of iconic imagery
-          into vivid, disorienting compositions. Masks, distorted pop culture symbols, layered collage:
-          all in service of one question — who are we beneath the face we show?
-        </p>
-        <p>
-          His work has been exhibited at Krause Gallery (NYC), Guy Hepner (NYC), Imitate Modern (London),
-          Meir Gallery (Belgium), ARCO Madrid, Art Basel, and Art Palm Beach.
-          Featured in <em>Vogue Italia</em> and <em>Dansk</em>.
-        </p>
-        <div class="about-series">
-          <span>A Loss of Innocence</span>
-          <span>The Mickey Me Collection</span>
-          <span>MI ME</span>
-          <span>Alts Iz Farloyrn</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       GALLERY
-  ============================================================ -->
-  <section id="gallery">
-    <div class="section-header reveal">
-      <span class="section-tag">All Works</span>
-      <h2>Collections</h2>
-    </div>
-
-    <div class="gallery-filters reveal" id="galleryFilters">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="loss-of-innocence">A Loss of Innocence</button>
-      <button class="filter-btn" data-filter="mickey-me">The Mickey Me Collection</button>
-      <button class="filter-btn" data-filter="mi-me">MI ME</button>
-      <button class="filter-btn" data-filter="alts">Alts Iz Farloyrn</button>
-      <button class="filter-btn" data-filter="solo">Solo Works</button>
-    </div>
-
-    <div class="gallery-grid" id="galleryGrid">
-      <!-- Items rendered by JS -->
-    </div>
-
-    <div class="gallery-load reveal">
-      <button class="btn btn-ghost" id="loadMore">Load More ↓</button>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       OWN A FAUVES
-  ============================================================ -->
-  <section id="own">
-    <div class="own-inner">
-      <div class="own-left reveal">
-        <span class="section-tag">Acquire</span>
-        <h2>Own a<br><span class="accent-red">Fauves</span></h2>
-        <p>
-          Original paintings, prints, and collections available for private acquisition.
-          Each work carries a fragment of the soul — reach out to discuss availability,
-          commissions, and exhibitions.
-        </p>
-        <div class="own-contact-direct">
-          <a href="mailto:soul@lefauves.com" class="own-email">soul@lefauves.com</a>
-          <a href="https://www.instagram.com/lefauves/" target="_blank" rel="noopener" class="own-ig">@lefauves on Instagram</a>
-        </div>
-      </div>
-
-      <div class="own-right reveal">
-        <form id="contactForm" class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-          <!-- Replace YOUR_FORM_ID with your Formspree form ID from formspree.io -->
-          <!-- Or use action="mailto:soul@lefauves.com" enctype="text/plain" -->
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Your name" required />
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="your@email.com" required />
-          </div>
-          <div class="form-group">
-            <label for="interest">Interested in</label>
-            <select id="interest" name="interest">
-              <option value="">Select a collection</option>
-              <option value="loss-of-innocence">A Loss of Innocence</option>
-              <option value="mickey-me">The Mickey Me Collection</option>
-              <option value="mi-me">MI ME</option>
-              <option value="alts">Alts Iz Farloyrn</option>
-              <option value="original">Original / Commission</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" placeholder="Tell me what moves you…" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-red btn-full">Send Message →</button>
-          <p class="form-note">Or write directly to <a href="mailto:soul@lefauves.com">soul@lefauves.com</a></p>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       FOOTER
-  ============================================================ -->
-  <footer id="footer">
-    <div class="footer-inner">
-      <div class="footer-logo">
-        <span class="logo-script logo-script--lg">Fauves</span>
-        <p class="footer-tagline">Soul Diver</p>
-      </div>
-
-      <nav class="footer-nav">
-        <a href="#feed">Feed</a>
-        <a href="#about">About</a>
-        <a href="#gallery">Works</a>
-        <a href="#own">Contact</a>
-        <a href="https://www.instagram.com/lefauves/" target="_blank" rel="noopener">Instagram</a>
-      </nav>
-
-      <div class="footer-bottom">
-        <p>© 2025 John Paul Fauves. All works reserved.</p>
-        <a href="mailto:soul@lefauves.com" class="footer-email">soul@lefauves.com</a>
-      </div>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
